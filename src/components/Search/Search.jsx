@@ -75,7 +75,7 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
    const resetSearch = localStorage.getItem('resetSearch');
  
    if (resetSearch === 'true') {
-     window.history.pushState({ path: '/' }, '', '/');
+   //   window.history.pushState({ path: '/' }, '', '/');
      localStorage.removeItem('resetSearch');
    }
  }, []);
