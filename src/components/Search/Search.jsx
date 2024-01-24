@@ -66,32 +66,32 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
   };
 
   useEffect(() => {
-   const handleUnload = () => {
+   const handleBeforeUnload = () => {
      localStorage.setItem('resetSearch', 'true');
    };
  
-   window.addEventListener('unload', handleUnload);
+   window.addEventListener('beforeunload', handleBeforeUnload);
  
    return () => {
-     window.removeEventListener('unload', handleUnload);
+     window.removeEventListener('beforeunload', handleBeforeUnload);
    };
  }, []);
- 
+
  useEffect(() => {
    const resetSearch = localStorage.getItem('resetSearch');
  
    if (resetSearch === 'true') {
-     window.history.pushState({ path: '/' }, '', '/');
+   //   window.history.pushState({ path: '/' }, '', '/');
      localStorage.removeItem('resetSearch');
    }
  }, []);
- 
- useEffect(() => {
+
+  useEffect(() => {
    const handlePopState = (event) => {
      if (window.location.pathname === '/') {
        onSearchResult([]);
        setWord('');
-       resetError();
+       resetError(); // Сбросим ошибку
      } else {
        // Установка флага программного изменения перед вызовом previousUrl
        setProgrammaticChange(true);
@@ -99,14 +99,13 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
        previousUrl();
      }
    };
- 
+
    window.addEventListener('popstate', handlePopState);
- 
+
    return () => {
      window.removeEventListener('popstate', handlePopState);
    };
  }, [onSearchResult, resetError]);
- 
 
   return (
     <section className='search-container'>
