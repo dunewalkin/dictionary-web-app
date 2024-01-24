@@ -1,0 +1,32 @@
+:root {
+   --clr-neutral-1: hsl(274, 82%, 60%); 
+   --clr-neutral-2: hsl(0, 0%, 46%); 
+   --clr-neutral-3: hsl(0, 0%, 91%); 
+   --clr-error: hsl(0, 100%, 66%);
+   
+   //for light
+   --clr-primary-1:hsl(0, 0%, 18%); 
+   --clr-primary-2: hsl(0, 0%, 2%);
+   --clr-background-1: hsl(0, 0%, 100%);
+   --clr-background-2: hsl(0, 0%, 96%);
+   
+   --shadow: var(--clr-neutral-2);
+   
+   
+   [data-theme='dark'] {
+      --clr-primary-1: hsl(0, 0%, 100%); 
+      --clr-primary-2: hsl(0, 0%, 100%); 
+      --clr-background-1: hsl(0, 0%, 2%); 
+      --clr-background-2: hsl(0, 0%, 12%); 
+
+      --shadow: var(--clr-neutral-1);
+
+      transition: background-color 0.3s ease;
+   }
+}
+
+
+
+
+
+
