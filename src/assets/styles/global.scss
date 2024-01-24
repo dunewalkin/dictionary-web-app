@@ -36,7 +36,7 @@ body {
    @include width-height(100%, 100vh);
    min-height: 100vh;
    @include flexbox(column, flex-start, center, 0);
-   padding-inline: 1.5rem;
+   // padding-inline: 1.5rem;
  }
 
 body {
@@ -115,6 +115,7 @@ a {
 .main-container {
    max-width: 46rem;
    padding-block: 3.62rem;
+   padding-inline: 1.5rem;
    @include width-height(100%, auto);
    @include flexbox(column, flex-start, flex-start, 3.22rem);
 
