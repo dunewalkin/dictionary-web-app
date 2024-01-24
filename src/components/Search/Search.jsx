@@ -65,26 +65,26 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
     }
   };
 
-//   useEffect(() => {
-//    const handleBeforeUnload = () => {
-//      localStorage.setItem('resetSearch', 'true');
-//    };
+  useEffect(() => {
+   const handleBeforeUnload = () => {
+     localStorage.setItem('resetSearch', 'true');
+   };
  
-//    window.addEventListener('beforeunload', handleBeforeUnload);
+   window.addEventListener('beforeunload', handleBeforeUnload);
  
-//    return () => {
-//      window.removeEventListener('beforeunload', handleBeforeUnload);
-//    };
-//  }, []);
+   return () => {
+     window.removeEventListener('beforeunload', handleBeforeUnload);
+   };
+ }, []);
 
-//  useEffect(() => {
-//    const resetSearch = localStorage.getItem('resetSearch');
+ useEffect(() => {
+   const resetSearch = localStorage.getItem('resetSearch');
  
-//    if (resetSearch === 'true') {
-//      window.history.pushState({ path: '/' }, '', '/');
-//      localStorage.removeItem('resetSearch');
-//    }
-//  }, []);
+   if (resetSearch === 'true') {
+     window.history.pushState({ path: '/' }, '', '/');
+     localStorage.removeItem('resetSearch');
+   }
+ }, []);
 
   useEffect(() => {
    const handlePopState = (event) => {
@@ -94,7 +94,7 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
        resetError(); // Сбросим ошибку
      } else {
        // Установка флага программного изменения перед вызовом previousUrl
-      //  setProgrammaticChange(true);
+       setProgrammaticChange(true);
        // Вызов previousUrl
        previousUrl();
      }
