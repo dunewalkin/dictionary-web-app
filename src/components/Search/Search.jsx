@@ -38,7 +38,7 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
       onSearchResult(data);
 
       if (data && data.length > 0 && !programmaticChange) {
-        const newUrl = `/info/${searchWord}`;
+        const newUrl = `/${searchWord}`;
         window.history.pushState({ path: newUrl }, '', newUrl);
       }
 
@@ -51,7 +51,7 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
 
   const previousUrl = () => {
     const currentUrl = window.location.pathname;
-    const wordFromUrl = currentUrl.replace('/info/', '');
+    const wordFromUrl = currentUrl.replace('/', '');
     if (wordFromUrl !== word) {
       setWord(wordFromUrl);
       handleSearch({ preventDefault: () => {} }, wordFromUrl);
