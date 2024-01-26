@@ -63,6 +63,7 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
     } catch (error) {
       console.error('Error fetching data:', error);
       onSearchResult([]);
+      document.activeElement.blur();
     }
   };
 
