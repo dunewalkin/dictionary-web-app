@@ -59,6 +59,7 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
       }
 
       setProgrammaticChange(false);
+      document.activeElement.blur();
     } catch (error) {
       console.error('Error fetching data:', error);
       onSearchResult([]);
