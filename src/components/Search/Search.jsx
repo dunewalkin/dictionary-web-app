@@ -7,13 +7,29 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
   const submitButtonRef = useRef(null);
   const [programmaticChange, setProgrammaticChange] = useState(false);
 
+
   useEffect(() => {
-    if (currentSynonym !== null || currentAntonym !== null) {
-      const targetWord = currentSynonym !== null ? currentSynonym : currentAntonym;
-      setWord(targetWord);
-      handleSearch({ preventDefault: () => {} }, targetWord);
-    }
-  }, [currentSynonym, currentAntonym]);
+   const isRootUrl = window.location.pathname === '/';
+   if (!isRootUrl) {
+     const wordFromUrl = window.location.pathname.replace('/', '');
+     setWord(wordFromUrl);
+     handleSearch({ preventDefault: () => {} }, wordFromUrl);
+   }
+ }, []);
+
+  useEffect(() => {
+   if (currentSynonym !== null) {
+      setWord(currentSynonym);
+     handleSearch({ preventDefault: () => {} }, currentSynonym);
+   }
+ }, [currentSynonym]);
+
+ useEffect(() => {
+   if (currentAntonym !== null) {
+      setWord(currentAntonym);
+     handleSearch({ preventDefault: () => {} }, currentAntonym);
+   }
+ }, [currentAntonym]);
 
   const handleSearch = async (event, searchWord = word) => {
     event.preventDefault();
@@ -55,7 +71,9 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
     if (wordFromUrl !== word) {
       setWord(wordFromUrl);
       handleSearch({ preventDefault: () => {} }, wordFromUrl);
-      console.log('Previous URL:', window.location.pathname);
+      console.log('Previous URL:', wordFromUrl);
+      console.log('word:',word);
+         console.log('current', currentUrl)
     }
   };
 
@@ -98,6 +116,8 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
      window.removeEventListener('popstate', handlePopState);
    };
  }, [onSearchResult, resetError]);
+
+ 
 
   return (
     <section className='search-container'>

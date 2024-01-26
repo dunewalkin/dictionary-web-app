@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './toggle.scss';
 import useLocalStorage from 'use-local-storage';
 
 const Toggle = ({ onToggle }) => {
-  const [isDarkMode, setIsDarkMode] = useLocalStorage('isDarkMode', false);
+  const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const [isDarkMode, setIsDarkMode] = useLocalStorage('isDarkMode', prefersDarkMode);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      setIsDarkMode(mediaQuery.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, [setIsDarkMode]);
 
   const toggleMode = () => {
     setIsDarkMode(!isDarkMode);
