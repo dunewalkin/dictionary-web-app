@@ -45,6 +45,7 @@ const App = () => {
       setHasWordData(true);
       setError(null);
     } catch (error) {
+      document.activeElement.blur();
       setWordData(null);
       setHasWordData(false);
       setError('No Definitions Found');
