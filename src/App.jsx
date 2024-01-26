@@ -30,9 +30,10 @@ const App = () => {
     }
   }, [theme]);
 
-  const resetError = () => {
-   setError(null);
- };
+   const resetError = () => {
+    setError(null);
+  };
+
 
   const handleSearchResult = async (data) => {
     try {
