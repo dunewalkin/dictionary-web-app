@@ -7,13 +7,13 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
   const submitButtonRef = useRef(null);
   const [programmaticChange, setProgrammaticChange] = useState(false);
 
-
   useEffect(() => {
    const isRootUrl = window.location.pathname === '/';
    if (!isRootUrl) {
      const wordFromUrl = window.location.pathname.replace('/', '');
      setWord(wordFromUrl);
      handleSearch({ preventDefault: () => {} }, wordFromUrl);
+     console.log('root-url:', wordFromUrl);
    }
  }, []);
 
@@ -90,14 +90,15 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
    };
  }, []);
 
- useEffect(() => {
-   const resetSearch = localStorage.getItem('resetSearch');
+//  useEffect(() => {
+//    const resetSearch = localStorage.getItem('resetSearch');
  
-   if (resetSearch === 'true') {
-     window.history.pushState({ path: '/' }, '', '/');
-     localStorage.removeItem('resetSearch');
-   }
- }, []);
+//    if (resetSearch === 'true') {
+//      window.history.pushState({ path: '/' }, '', '/');
+//      localStorage.removeItem('resetSearch');
+//      console.log('reset');
+//    }
+//  }, []);
 
   useEffect(() => {
    const handlePopState = (event) => {
@@ -138,3 +139,4 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
 };
 
 export default Search;
+
