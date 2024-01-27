@@ -67,16 +67,22 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
   };
 
   const previousUrl = () => {
-    const currentUrl = window.location.pathname;
-    const wordFromUrl = currentUrl.replace('/', '');
-    if (wordFromUrl !== word) {
-      setWord(wordFromUrl);
-      handleSearch({ preventDefault: () => {} }, wordFromUrl);
-      console.log('Previous URL:', wordFromUrl);
-      console.log('word:',word);
-         console.log('current', currentUrl)
-    }
-  };
+   const currentUrl = window.location.pathname;
+   let wordFromUrl = currentUrl.replace('/', '');
+
+   if (wordFromUrl.includes('%20')) {
+       wordFromUrl = wordFromUrl.replace(/%20/g, ' ');
+   }
+
+   if (wordFromUrl !== word) {
+       setWord(wordFromUrl);
+       handleSearch({ preventDefault: () => {} }, wordFromUrl);
+       console.log('Previous URL:', wordFromUrl);
+       console.log('word:', word);
+       console.log('current', currentUrl);
+   }
+};
+
 
   useEffect(() => {
    const handleBeforeUnload = () => {
