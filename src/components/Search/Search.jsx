@@ -131,7 +131,12 @@ const Search = ({ onSearchResult, currentSynonym, currentAntonym, resetError }) 
           value={word}
           onChange={(e) => setWord(e.target.value)}
         />
-        <button type="submit" className='search-btn' ref={submitButtonRef}></button>
+        <button 
+        type="submit" 
+        className='search-btn' 
+        ref={submitButtonRef}
+        aria-label="Submit">
+        </button>
       </form>
       {isEmptyQuery && <p className='empty-error'>Whoops, can’t be empty…</p>}
     </section>
