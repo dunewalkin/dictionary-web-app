@@ -113,11 +113,7 @@ a {
 }
 
 input, textarea {
-   font-size: 1rem;
-
-   @include mq (small) {
-      font-size: 0.875rem;
-   } 
+    font-size: 1.25rem; 
 }
 
 .main-container {
