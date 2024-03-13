@@ -20,7 +20,7 @@ const Info = ({ wordData, onSynonymClick, onAntnonymClick }) => {
   };
 
   if (!wordData) {
-   // window.history.pushState({ path: '/' }, '', '/');
+   window.history.pushState({ path: '/' }, '', '/');
     return null;
   }
 
