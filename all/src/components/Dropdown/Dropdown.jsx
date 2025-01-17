@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import useLocalStorage from 'use-local-storage';
-import '../../components/Dropdown/dropdown.scss';
+import './dropdown.scss';
 
 const fontOptions = [
   { name: 'Sans Serif', value: 'Inter, sans-serif', class: 'sans-serif' },

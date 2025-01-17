@@ -1,0 +1,129 @@
+html,
+body {
+    height: 100%;
+}
+
+*, *::before, *::after {
+   box-sizing: border-box;
+ }
+
+ * {
+   margin: 0;
+ }
+
+ body {
+   line-height: 1.5;
+   -webkit-font-smoothing: antialiased;
+ }
+
+ img, picture, video, canvas, svg {
+   display: block;
+   max-width: 100%;
+ }
+
+ input, button, textarea, select {
+   font: inherit;
+ }
+ 
+ p, h1, h2, h3, h4, h5, h6 {
+   overflow-wrap: break-word;
+ }
+
+body {
+   background-color: var(--clr-background-1);
+   font-size: 1.125rem;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 1.5rem;
+   color: var(--clr-primary-1);
+
+   transition: background-color 0.3s ease;
+
+   @include mq (small) {
+      font-size: 0.9375rem;
+   }
+}
+
+#app {
+   @include width-height(100%, 100vh);
+   min-height: 100vh;
+   @include flexbox(column, flex-start, center, 0);
+   padding-inline: 1.5rem;
+}
+
+h1 {
+   font-size: 4rem;
+   font-weight: 700;
+   line-height: normal;
+   color: var(--clr-primary-1);
+
+   @include mq (small) {
+      font-size: 2rem;
+   }
+}
+
+h2 {
+   font-size: 1.5rem;
+   font-weight: 700;
+   color: var(--clr-primary-2);
+
+   @include mq (small) {
+      font-size: 1rem;
+   }
+}
+
+h3 {
+   font-size: 1.25rem;
+   font-weight: 400;
+   color: var(--clr-primary-2);
+
+   @include mq (small) {
+      font-size: 1rem;
+   }
+}
+
+.body-s {
+   font-size: 0.875rem;
+   font-weight: 400;
+   color: var(--clr-primary-2);
+   text-decoration: underline;
+}
+
+button {
+   cursor: pointer;
+   padding: 0;
+   transition: .2s ease;
+   font-weight: 700;
+}
+
+button, input {
+   outline: none;
+   border: none;
+}
+
+ul {
+   padding: 0;
+}
+
+a {
+   text-decoration: none;
+}
+
+input, textarea {
+    font-size: 1.25rem; 
+}
+
+.main-container {
+   max-width: 46rem;
+   padding-block: 3.62rem;
+   @include width-height(100%, auto);
+   @include flexbox(column, flex-start, flex-start, 3.22rem);
+
+   @include mq (small) {
+      gap: 1.5rem;
+   }
+}
+
+.main-error {
+   height: 100%;
+}

@@ -1,4 +1,4 @@
-import '../../components/Header/header.scss';
+import './header.scss';
 import Toggle from '../Toggle/Toggle';
 import Dropdown from '../Dropdown/Dropdown';
 import logo from '../../assets/images/logo.svg'
