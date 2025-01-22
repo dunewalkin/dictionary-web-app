@@ -29,55 +29,9 @@
    export default {
       components: { Header, Search, Info, Error },
       setup() {
-         const store = useStore(); 
          const route = useRoute();
          const router = useRouter();
       
-      //    const word = computed(() => route.params.word || ''); // Текущее слово из маршрута
-      //    const wordData = computed(() => store.getters.wordData); // Данные слова
-      //    const meanings = computed(() => store.getters.meanings); // Значения слова
-      //    const error = computed(() => store.getters.error); // Ошибка
-
-      //    const fetchDefinition = () => {
-      //       store.dispatch('fetchDefinition', { word: word.value, router });
-      //    };
-
-      //    const updateWord = (newWord) => {
-      //       store.dispatch('fetchDefinition', { word: newWord, router });
-      //    };
-
-      //    const fetchSynonym = (synonym) => {
-      //       store.dispatch('fetchDefinition', { word: synonym, router });
-      //    };
-
-      //    const fetchAntonym = (antonym) => {
-      //       store.dispatch('fetchDefinition', { word: antonym, router });
-      //    };
-
-      //    watch(
-      //    () => route.params.word,
-      //    (newWord) => {
-      //       if (newWord) {
-      //          fetchDefinition(newWord);
-      //       }
-      //    },
-      //    { immediate: true }
-      // );
-
-
-      //    return {
-      //       word,
-      //       wordData,
-      //       meanings,
-      //       error,
-      //       fetchDefinition,
-      //       updateWord,
-      //       fetchSynonym,
-      //       fetchAntonym,
-      //    };
-
-
-
          const wordData = ref(null);
          const word = ref(route.params.word || ""); 
          const meanings = ref([]); 
