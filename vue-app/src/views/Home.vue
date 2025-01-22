@@ -33,117 +33,48 @@
          const route = useRoute();
          const router = useRouter();
       
-      //    const word = computed(() => route.params.word || ''); // Текущее слово из маршрута
-      //    const wordData = computed(() => store.getters.wordData); // Данные слова
-      //    const meanings = computed(() => store.getters.meanings); // Значения слова
-      //    const error = computed(() => store.getters.error); // Ошибка
+         const word = computed(() => route.params.word || ''); 
+         const wordData = computed(() => store.getters.wordData); 
+         const meanings = computed(() => store.getters.meanings); 
+         const error = computed(() => store.getters.error); 
 
-      //    const fetchDefinition = () => {
-      //       store.dispatch('fetchDefinition', { word: word.value, router });
-      //    };
-
-      //    const updateWord = (newWord) => {
-      //       store.dispatch('fetchDefinition', { word: newWord, router });
-      //    };
-
-      //    const fetchSynonym = (synonym) => {
-      //       store.dispatch('fetchDefinition', { word: synonym, router });
-      //    };
-
-      //    const fetchAntonym = (antonym) => {
-      //       store.dispatch('fetchDefinition', { word: antonym, router });
-      //    };
-
-      //    watch(
-      //    () => route.params.word,
-      //    (newWord) => {
-      //       if (newWord) {
-      //          fetchDefinition(newWord);
-      //       }
-      //    },
-      //    { immediate: true }
-      // );
-
-
-      //    return {
-      //       word,
-      //       wordData,
-      //       meanings,
-      //       error,
-      //       fetchDefinition,
-      //       updateWord,
-      //       fetchSynonym,
-      //       fetchAntonym,
-      //    };
-
-
-
-         const wordData = ref(null);
-         const word = ref(route.params.word || ""); 
-         const meanings = ref([]); 
-         const error = ref(false);
-      
-         const fetchDefinition = async () => {
-            if (!word.value) {
-               error.value = true;
-               return;
-            }
-      
-            try {
-               const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.value}`);
-               if (!response.ok) {
-                  throw new Error("Word not found");
-               }
-               const data = await response.json();
-               console.log(data);
-               wordData.value = data[0]; 
-               meanings.value = data[0].meanings; 
-               error.value = false;
-      
-               router.push({ name: "WordDetails", params: { word: word.value } });
-            } catch (err) {
-               error.value = true;
-               wordData.value = null;
-               meanings.value = [];
-            }
+         const fetchDefinition = () => {
+            store.dispatch('fetchDefinition', { word: word.value, router });
          };
 
-         // Обновление слова при вводе
          const updateWord = (newWord) => {
-            word.value = newWord;
+            store.dispatch('fetchDefinition', { word: newWord, router });
          };
 
          const fetchSynonym = (synonym) => {
-            word.value = synonym;
-            fetchDefinition();
-         }
+            store.dispatch('fetchDefinition', { word: synonym, router });
+         };
 
          const fetchAntonym = (antonym) => {
-            word.value = antonym;
-            fetchDefinition();
-         }
-      
+            store.dispatch('fetchDefinition', { word: antonym, router });
+         };
+
          watch(
-            () => route.params.word,
-            (newWord) => {
+         () => route.params.word,
+         (newWord) => {
             if (newWord) {
-               word.value = newWord;
-               fetchDefinition();
+               fetchDefinition(newWord);
             }
-            },
-            { immediate: true }
-         );
+         },
+         { immediate: true }
+      );
+
 
          return {
-            wordData,
             word,
+            wordData,
             meanings,
             error,
             fetchDefinition,
+            updateWord,
             fetchSynonym,
             fetchAntonym,
-            updateWord,
-         }
+         };
       }
    }
 </script>

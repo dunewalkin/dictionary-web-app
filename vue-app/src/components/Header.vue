@@ -1,7 +1,6 @@
 <template>
    <header className='header-wrapper'>
       <div className='header-logo'>
-         <!-- <IconLogo/> -->
          <img src="./icons/logo.svg" alt="Logo">
       </div>
 
@@ -16,7 +15,6 @@
 <script>
    import Toggle from './Toggle.vue';
    import Dropdown from './Dropdown.vue';
-   // import IconLogo from './icons/IconLogo.vue';
 
    export default {
       components: { Toggle, Dropdown },

@@ -25,16 +25,13 @@
          };
       },
       watch: {
-         // Обновляем локальную копию, если родитель изменит слово
          word(newVal) {
             this.localWord = newVal;
          },
       },
       methods: {
          onSubmit() {
-            // Уведомляем родителя об изменении слова
             this.$emit("update-word", this.localWord);
-            // Запрашиваем определение через событие
             this.$emit("fetch-definition");
          },
       },

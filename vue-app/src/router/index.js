@@ -10,8 +10,8 @@ const routes = [
   {
     path: "/:word",
     name: "WordDetails",
-    component: Home, // Используем тот же компонент для отображения результатов
-    props: true,     // Передаём параметр как пропс
+    component: Home, 
+    props: true,     
   },
 ];
 

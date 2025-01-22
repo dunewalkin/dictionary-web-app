@@ -26,30 +26,25 @@
  export default {
    name: 'Toggle',
    setup() {
-     // Проверяем системные настройки
      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
      const isDarkMode = ref(prefersDarkMode);
  
-     // Устанавливаем текущий режим
      const setIsDarkMode = (value) => {
        isDarkMode.value = value;
        localStorage.setItem('isDarkMode', value);
-       document.body.setAttribute('data-theme', value ? 'dark' : 'light'); // Обновляем атрибут темы
+       document.body.setAttribute('data-theme', value ? 'dark' : 'light'); 
      };
  
-     // Переключаем режим
      const toggleMode = () => {
        const newMode = !isDarkMode.value;
        setIsDarkMode(newMode);
      };
  
-     // Обрабатываем изменение системных настроек
      const handleChange = (e) => {
        setIsDarkMode(e.matches);
      };
  
      onMounted(() => {
-       // Проверяем сохранённое значение темы в localStorage
        const savedMode = localStorage.getItem('isDarkMode');
        if (savedMode !== null) {
          isDarkMode.value = JSON.parse(savedMode);
@@ -58,13 +53,11 @@
          document.body.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
        }
  
-       // Добавляем слушатель системных изменений
        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
        mediaQuery.addEventListener('change', handleChange);
      });
  
      onUnmounted(() => {
-       // Удаляем слушатель изменений
        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
        mediaQuery.removeEventListener('change', handleChange);
      });
@@ -120,8 +113,6 @@
       transform: translate(115%, -50%);
    }
 }
-
-
 
 </style>
  
