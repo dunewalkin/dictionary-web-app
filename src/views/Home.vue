@@ -95,7 +95,6 @@
                   throw new Error("Word not found");
                }
                const data = await response.json();
-               console.log(data);
                wordData.value = data[0]; 
                meanings.value = data[0].meanings; 
                error.value = false;
@@ -108,7 +107,6 @@
             }
          };
 
-         // Обновление слова при вводе
          const updateWord = (newWord) => {
             word.value = newWord;
          };
@@ -116,12 +114,21 @@
          const fetchSynonym = (synonym) => {
             word.value = synonym;
             fetchDefinition();
-         }
+            scrollToTop();
+         };
 
          const fetchAntonym = (antonym) => {
             word.value = antonym;
             fetchDefinition();
-         }
+            scrollToTop();
+         };
+
+         const scrollToTop = () => {
+            window.scrollTo({
+               top: 0,
+               behavior: 'smooth', 
+            });
+         };
       
          watch(
             () => route.params.word,

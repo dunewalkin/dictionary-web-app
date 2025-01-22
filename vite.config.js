@@ -20,7 +20,7 @@ export default defineConfig({
       scss: {
         additionalData: `
           @use "@/assets/styles/mixins.scss" as *;
-          @import "@/assets/styles/variables";
+          @use "@/assets/styles/variables";
         `
       }
     }
