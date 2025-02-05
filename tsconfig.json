@@ -1,0 +1,40 @@
+{
+   "compilerOptions": {
+     "target": "ESNext",
+     "module": "ESNext",
+     "moduleResolution": "Node",
+     "types": ["node"],
+     "strict": true,
+     "allowJs": true,
+     "esModuleInterop": true,
+     "forceConsistentCasingInFileNames": true,
+     "resolveJsonModule": true,
+     "skipLibCheck": true,
+     "baseUrl": "./",
+      "paths": {
+         "@/*": ["src/*"]
+      }
+   },
+   "include": ["src", "vite.config.ts"]
+ }
+
+// {
+//    "compilerOptions": {
+//      "allowJs": true,
+//      "target": "ESNext",
+//      "module": "ESNext",
+//      "moduleResolution": "Node",
+//      "strict": true,
+//      "esModuleInterop": true,
+//      "forceConsistentCasingInFileNames": true,
+//      "resolveJsonModule": true,
+//      "skipLibCheck": true,
+//      "baseUrl": "./",
+//      "paths": {
+//        "@/*": ["src/*"]
+//      }
+//    },
+//    "include": ["src", "vite.config.ts"]
+//  }
+ 
+ 

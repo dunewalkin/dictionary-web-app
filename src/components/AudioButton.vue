@@ -1,5 +1,28 @@
+<script setup lang="ts">
+   import { useWordStore } from "../stores/wordStore";
+   import { storeToRefs } from "pinia";
+
+   const wordStore = useWordStore();
+   const { wordData } = storeToRefs(wordStore);
+
+   interface Phonetic {
+      audio: string;
+   }
+
+   const playAudio = () => {
+      if (wordData.value?.phonetics) {
+         const audioData = wordData.value.phonetics.find((pho: Phonetic) => pho.audio !== '');
+         if (audioData?.audio) {
+            const audio = new Audio(audioData.audio);
+            audio.play().catch((err) => console.error('Ошибка воспроизведения аудио:', err));
+         }
+      }
+   };
+   
+</script>
+
 <template>
-   <button class="audio-btn" @click="playAudio" :disabled="!audioUrl">
+   <button class="audio-btn" @click="playAudio" v-if="wordData?.phonetics?.length">
       <svg class="audio-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 75">
          <g>
          <circle cx="37.5" cy="37.5" r="37.5" />
@@ -8,46 +31,6 @@
       </svg>
    </button>
 </template>
- 
-<script>
-   import { ref, watch } from 'vue';
-
-   export default {
-   props: {
-      wordData: {
-         type: Object,
-         required: true,
-      },
-   },
-   setup(props) {
-      const audioUrl = ref(null);
-
-      watch(
-         () => props.wordData,
-         (newData) => {
-         if (newData && newData.phonetics) {
-            const audioData = newData.phonetics.find((pho) => pho.audio !== '') || null;
-            audioUrl.value = audioData ? audioData.audio : null;
-         }
-         },
-         { immediate: true }
-      );
-
-      const playAudio = () => {
-         if (audioUrl.value) {
-         const audio = new Audio(audioUrl.value);
-         audio.play().catch((err) => console.error('Ошибка воспроизведения аудио:', err));
-         }
-      };
-
-      return {
-         audioUrl,
-         playAudio,
-      };
-   },
-   };
-</script>
-
 
 <style lang="scss">
    .audio-btn {
@@ -83,3 +66,43 @@
       stroke: var(--clr-neutral-1);
    }
 </style>
+
+
+<!-- <script lang="ts">
+   import { ref, watch } from 'vue';
+
+   export default {
+   props: {
+      wordData: {
+         type: Object,
+         required: true,
+      },
+   },
+   setup(props) {
+      const audioUrl = ref<string | null>(null);
+
+      watch(
+         () => props.wordData,
+         (newData) => {
+         if (newData && newData.phonetics) {
+            const audioData = newData.phonetics.find((pho) => pho.audio !== '') || null;
+            audioUrl.value = audioData ? audioData.audio : null;
+         }
+         },
+         { immediate: true }
+      );
+
+      const playAudio = () => {
+         if (audioUrl.value) {
+         const audio = new Audio(audioUrl.value);
+         audio.play().catch((err) => console.error('Ошибка воспроизведения аудио:', err));
+         }
+      };
+
+      return {
+         audioUrl,
+         playAudio,
+      };
+   },
+   };
+</script> -->

@@ -1,30 +1,23 @@
+<script setup lang="ts">
+   import { useWordStore } from "../stores/wordStore";
+   import { storeToRefs } from "pinia";
+   import AudioButton from './AudioButton.vue';
+
+   const wordStore = useWordStore();
+   const { wordData } = storeToRefs(wordStore);
+</script>
+
 <template>
    <header class="main-info">
-         <div class="word-info">
+         <div class="word-info" v-if="wordData">
             <h1>{{ wordData.word}}</h1>
             <h2 class="word-phonetic">{{ wordData.phonetic }}</h2>
          </div>
          <div class="audio">
-            <AudioButton :wordData="wordData"  />
+            <AudioButton />
          </div>
       </header>
 </template>
-
-<script>
-   import AudioButton from './AudioButton.vue';
-
-   export default {
-      props: {
-         wordData: {
-            type: Object,
-            required: true,
-         },
-      },
-      components: {
-         AudioButton,
-      },
-   };
-</script>
 
 <style lang="scss">
    .main-info {
