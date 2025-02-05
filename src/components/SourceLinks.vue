@@ -1,7 +1,15 @@
+<script setup lang="ts">
+   import { useWordStore } from "../stores/wordStore";
+   import { storeToRefs } from "pinia";
+
+   const wordStore = useWordStore();
+   const { wordData } = storeToRefs(wordStore);
+</script>
+
 <template>
    <footer class="source-container">
       <h4 class='body-s source-title'>Source</h4>
-      <div class="source-links">
+      <div class="source-links" v-if="wordData">
          <a v-for="(sourceUrl, index) in wordData.sourceUrls"
             :href="sourceUrl || '#'"
             class="body-s source-item"
@@ -14,17 +22,6 @@
       </div>
    </footer> 
 </template>
-
-<script>
-   export default {
-      props: {
-         wordData: {
-            type: Object,
-            required: true,
-         },
-      },
-   };
-</script>
 
 <style lang="scss">
    .source-container {

@@ -1,4 +1,70 @@
-<script setup>
+<script setup lang="ts">
+   import { ref, onMounted, onUnmounted, watch } from "vue";
+
+   interface fontOption {
+      name: string;
+      value: string;
+      class: string;
+   }
+
+   const fontOptions: fontOption[] = [
+      { name: "Sans Serif", value: "Inter, sans-serif", class: "sans-serif" },
+      { name: "Serif", value: "Lora, serif", class: "serif" },
+      { name: "Mono", value: "Inconsolata, monospace", class: "monospace" },
+   ];
+
+   const isFlipped = ref<boolean>(false);
+   const isDropdownOpen = ref<boolean>(false);
+   const selectedFont = ref<string>(
+      localStorage.getItem("selectedFont") || fontOptions[0].value
+   );
+
+   const dropdownRef = ref<HTMLElement | null>(null);
+
+   const currentFont = ref<fontOption>(
+      fontOptions.find((font) => font.value === selectedFont.value) ||
+         fontOptions[0]
+   );
+
+   const toggleDropdown = () => {
+      isFlipped.value = !isFlipped.value;
+      isDropdownOpen.value = !isDropdownOpen.value;
+   };
+
+   const selectFont = (font: fontOption) => {
+      currentFont.value = font;
+      selectedFont.value = font.value;
+      applyFontFamily(font);
+      toggleDropdown();
+      localStorage.setItem("selectedFont", font.value);
+   };
+
+   const applyFontFamily = (font: fontOption) => {
+      document.body.style.fontFamily = font.value;
+   };
+
+   const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node | null;
+      if (dropdownRef.value && target && !dropdownRef.value.contains(target)) {
+         isFlipped.value = false;
+         isDropdownOpen.value = false;
+      }
+   };
+
+   onMounted(() => {
+      document.addEventListener("mousedown", handleClickOutside);
+
+      applyFontFamily(currentFont.value);
+   });
+
+   onUnmounted(() => {
+      document.removeEventListener("mousedown", handleClickOutside);
+   });
+
+   watch(selectedFont, (newFont) => {
+      const font = fontOptions.find((f) => f.value === newFont);
+      if (font) applyFontFamily(font);
+   });
 
 </script>
 
@@ -22,87 +88,7 @@
        </button>
      </div>
    </div>
- </template>
- 
- <script>
- import { ref, onMounted, onUnmounted, watch } from "vue";
- 
- const fontOptions = [
-   { name: "Sans Serif", value: "Inter, sans-serif", class: "sans-serif" },
-   { name: "Serif", value: "Lora, serif", class: "serif" },
-   { name: "Mono", value: "Inconsolata, monospace", class: "monospace" },
- ];
- 
- export default {
-   name: "Dropdown",
-   setup() {
-     const isFlipped = ref(false);
-     const isDropdownOpen = ref(false);
-     const selectedFont = ref(
-       localStorage.getItem("selectedFont") || fontOptions[0].value
-     );
-     const dropdownRef = ref(null);
- 
-     const currentFont = ref(
-       fontOptions.find((font) => font.value === selectedFont.value) ||
-         fontOptions[0]
-     );
- 
-     const toggleDropdown = () => {
-       isFlipped.value = !isFlipped.value;
-       isDropdownOpen.value = !isDropdownOpen.value;
-     };
- 
-     const selectFont = (font) => {
-       currentFont.value = font;
-       selectedFont.value = font.value;
-       applyFontFamily(font);
-       toggleDropdown();
-       localStorage.setItem("selectedFont", font.value);
-     };
- 
-     const applyFontFamily = (font) => {
-       document.body.style.fontFamily = font.value;
-     };
- 
-     const handleClickOutside = (event) => {
-       if (
-         dropdownRef.value &&
-         !dropdownRef.value.contains(event.target)
-       ) {
-         isFlipped.value = false;
-         isDropdownOpen.value = false;
-       }
-     };
- 
-     onMounted(() => {
-       document.addEventListener("mousedown", handleClickOutside);
- 
-       // Применяем сохранённый шрифт при монтировании
-       applyFontFamily(currentFont.value);
-     });
- 
-     onUnmounted(() => {
-       document.removeEventListener("mousedown", handleClickOutside);
-     });
- 
-     watch(selectedFont, (newFont) => {
-       applyFontFamily({ value: newFont });
-     });
- 
-     return {
-       fontOptions,
-       isFlipped,
-       isDropdownOpen,
-       selectedFont,
-       dropdownRef,
-       toggleDropdown,
-       selectFont,
-       currentFont,
-     };
-   },
- };
- </script>
+</template>
 
 <style lang="scss">
    .dropdown-container {

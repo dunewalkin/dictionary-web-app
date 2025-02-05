@@ -1,3 +1,27 @@
+<script setup lang="ts">
+   import { ref, watch, defineProps, defineEmits } from "vue";
+
+   const props = defineProps<{
+      word: string;
+   }>();
+
+   const localWord = ref(props.word);
+
+   watch(() => props.word, (newVal) => {
+      localWord.value = newVal;
+   });
+
+   const emit = defineEmits<{
+      (event: "update-word", value: string): void;
+      (event: "fetch-definition"): void;
+   }>();
+
+   const onSubmit = () => {
+      emit("update-word", localWord.value);
+      emit("fetch-definition");
+   };
+</script>
+
 <template>
    <div class="search-container">
       <form class="search-form" @submit.prevent="onSubmit">
@@ -11,12 +35,13 @@
    </div>
 </template>
  
-<script>
+<!-- <script>
    export default {
       props: {
          word: {
             type: String,
             required: true,
+            default: "", 
          },
       },
       data() {
@@ -25,21 +50,18 @@
          };
       },
       watch: {
-         // Обновляем локальную копию, если родитель изменит слово
          word(newVal) {
             this.localWord = newVal;
          },
       },
       methods: {
          onSubmit() {
-            // Уведомляем родителя об изменении слова
             this.$emit("update-word", this.localWord);
-            // Запрашиваем определение через событие
             this.$emit("fetch-definition");
          },
       },
    }
-</script>
+</script> -->
 
 <style lang="scss">
 

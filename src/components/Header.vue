@@ -1,7 +1,11 @@
+<script setup lang="ts">
+   import Toggle from './Toggle.vue';
+   import Dropdown from './Dropdown.vue';
+</script>
+
 <template>
    <header className='header-wrapper'>
       <div className='header-logo'>
-         <!-- <IconLogo/> -->
          <img src="./icons/logo.svg" alt="Logo">
       </div>
 
@@ -12,16 +16,6 @@
       </div>    
     </header>
 </template>
-
-<script>
-   import Toggle from './Toggle.vue';
-   import Dropdown from './Dropdown.vue';
-   // import IconLogo from './icons/IconLogo.vue';
-
-   export default {
-      components: { Toggle, Dropdown },
-   }
-</script>
 
 <style lang="scss">
    .header-wrapper {
