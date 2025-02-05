@@ -1,81 +1,64 @@
+<script setup lang="ts">
+   import { ref, onMounted, onUnmounted } from 'vue';
+
+   const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+   const isDarkMode = ref<boolean>(prefersDarkMode);
+
+   const setIsDarkMode = (value: boolean): void => {
+      isDarkMode.value = value;
+      localStorage.setItem('isDarkMode', JSON.stringify(value));
+      document.body.setAttribute('data-theme', value ? 'dark' : 'light'); 
+   };
+
+   const toggleMode = (): void => {
+      const newMode = !isDarkMode.value;
+      setIsDarkMode(newMode);
+   };
+
+   const handleChange = (e: MediaQueryListEvent): void => {
+      setIsDarkMode(e.matches);
+   };
+
+   onMounted(() => {
+      const savedMode = localStorage.getItem('isDarkMode');
+      if (savedMode !== null) {
+         isDarkMode.value = JSON.parse(savedMode) as boolean;
+         document.body.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
+      } else {
+         document.body.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
+      }
+
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.addEventListener('change', handleChange);
+   });
+
+   onUnmounted(() => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      mediaQuery.removeEventListener('change', handleChange);
+   });
+</script>
+
 <template>
    <div class="toggle-container">
-     <button
-       :class="['toggle-btn', { 'toggle-active': isDarkMode }]"
-       @click="toggleMode"
-       aria-label="Toggle"
-     ></button>
-     <svg
-       :class="['moon-icon', { 'moon-icon-active': isDarkMode }]"
-       xmlns="http://www.w3.org/2000/svg"
-       width="22"
-       height="22"
-       viewBox="0 0 22 22"
-     >
-       <path
-         fill="none"
-         d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"
-       />
-     </svg>
+      <button
+         :class="['toggle-btn', { 'toggle-active': isDarkMode }]"
+         @click="toggleMode"
+         aria-label="Toggle"
+      ></button>
+      <svg
+         :class="['moon-icon', { 'moon-icon-active': isDarkMode }]"
+         xmlns="http://www.w3.org/2000/svg"
+         width="22"
+         height="22"
+         viewBox="0 0 22 22"
+      >
+         <path
+            fill="none"
+            d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"
+         />
+      </svg>
    </div>
- </template>
- 
- <script>
- import { ref, onMounted, onUnmounted } from 'vue';
- 
- export default {
-   name: 'Toggle',
-   setup() {
-     // Проверяем системные настройки
-     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-     const isDarkMode = ref(prefersDarkMode);
- 
-     // Устанавливаем текущий режим
-     const setIsDarkMode = (value) => {
-       isDarkMode.value = value;
-       localStorage.setItem('isDarkMode', value);
-       document.body.setAttribute('data-theme', value ? 'dark' : 'light'); // Обновляем атрибут темы
-     };
- 
-     // Переключаем режим
-     const toggleMode = () => {
-       const newMode = !isDarkMode.value;
-       setIsDarkMode(newMode);
-     };
- 
-     // Обрабатываем изменение системных настроек
-     const handleChange = (e) => {
-       setIsDarkMode(e.matches);
-     };
- 
-     onMounted(() => {
-       // Проверяем сохранённое значение темы в localStorage
-       const savedMode = localStorage.getItem('isDarkMode');
-       if (savedMode !== null) {
-         isDarkMode.value = JSON.parse(savedMode);
-         document.body.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
-       } else {
-         document.body.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
-       }
- 
-       // Добавляем слушатель системных изменений
-       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-       mediaQuery.addEventListener('change', handleChange);
-     });
- 
-     onUnmounted(() => {
-       // Удаляем слушатель изменений
-       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-       mediaQuery.removeEventListener('change', handleChange);
-     });
- 
-     return {
-       isDarkMode,
-       toggleMode,
-     };
-   },
- };
- </script>
+</template>
 
 <style lang="scss">
 

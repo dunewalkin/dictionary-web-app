@@ -1,3 +1,15 @@
+<script setup lang="ts">
+   import { computed } from "vue";
+   import { useWordStore } from "../stores/wordStore";
+   import { storeToRefs } from "pinia";
+
+   const wordStore = useWordStore();
+   const { wordData } = storeToRefs(wordStore);
+
+   const meanings = computed(() => wordData.value?.meanings || []);
+</script>
+
+
 <template>
    <article v-for="(meaning, index) in meanings" :key="index">
       
@@ -25,7 +37,9 @@
          <h3 class="title">Synonyms</h3>
          <ul class="synonym-wrapper">
             <li v-for="(synonym, synIndex) in meaning.synonyms" :key="synIndex">
-               <button class="synonym-item"  @click="fetchSynonym(synonym)">{{ synonym}}</button> 
+               <button class="synonym-item" @click="wordStore.fetchSynonym(synonym)">
+                  {{ synonym }}
+               </button> 
             </li>
          </ul>
       </aside>
@@ -34,36 +48,15 @@
          <h3 class="title">Antonyms</h3>
          <ul class="synonym-wrapper">
             <li v-for="(antonym, antIndex) in meaning.antonyms" :key="antIndex">
-               <button class="synonym-item"  @click="fetchAntonym(antonym)">{{ antonym, antonym }}</button> 
+               <button class="synonym-item" @click="wordStore.fetchAntonym(antonym)">
+                  {{ antonym }}
+               </button> 
             </li>
          </ul>
       </aside>
 
    </article>
 </template>
-
-<script>
-   export default {
-      props: {
-         wordData: {
-            type: Object,
-            required: true,
-         },
-         meanings: {
-            type: Array,
-            required: true,
-         },
-         fetchSynonym: {
-            type: Function,
-            required: true,
-         },
-         fetchAntonym: {
-            type: Function,
-            required: true,
-         },
-      },
-   };
-</script>
 
 <style lang="scss">
    .speech-container {
