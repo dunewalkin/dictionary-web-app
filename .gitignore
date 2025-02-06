@@ -1,30 +1,54 @@
-# Logs
-logs
+# MacOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs & debugging files
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+/logs
+/log
+*.trace
 
-node_modules
-.DS_Store
-dist
-dist-ssr
-coverage
-*.local
+# Dependency directories
+node_modules/
+pnpm-lock.yaml
+yarn.lock
 
-/cypress/videos/
-/cypress/screenshots/
+# Build output
+dist/
+dist-ssr/
+coverage/
+.out/
+.build/
+.cache/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# TypeScript
+*.tsbuildinfo
+
+# IDE/Editor files
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.iml
 
-*.tsbuildinfo
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Vite-specific files
+.vite/
+.vitepress/dist/
+.vite-inspect/
+
