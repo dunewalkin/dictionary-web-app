@@ -23,7 +23,7 @@
    </footer> 
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .source-container {
       border-top: 1px solid var(--clr-neutral-2);
       margin-top: 2.5rem;

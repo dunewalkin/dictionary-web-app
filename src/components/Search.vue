@@ -34,36 +34,8 @@
       </form>   
    </div>
 </template>
- 
-<!-- <script>
-   export default {
-      props: {
-         word: {
-            type: String,
-            required: true,
-            default: "", 
-         },
-      },
-      data() {
-         return {
-            localWord: this.word,
-         };
-      },
-      watch: {
-         word(newVal) {
-            this.localWord = newVal;
-         },
-      },
-      methods: {
-         onSubmit() {
-            this.$emit("update-word", this.localWord);
-            this.$emit("fetch-definition");
-         },
-      },
-   }
-</script> -->
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .search-container {
    position: relative;

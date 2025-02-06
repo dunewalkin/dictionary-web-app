@@ -19,7 +19,7 @@
       </header>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .main-info {
       @include flexbox(row, space-between, center, 0);
    }

@@ -32,7 +32,7 @@
    </button>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .audio-btn {
       @include width-height(4.6875rem, 4.6875rem);
          border-radius: 50%;

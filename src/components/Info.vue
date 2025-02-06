@@ -22,7 +22,7 @@
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
    .info-wrapper {
       @include width-height(100%, 100%);
    }

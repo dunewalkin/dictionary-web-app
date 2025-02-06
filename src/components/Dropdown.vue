@@ -90,7 +90,7 @@
    </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .dropdown-container {
       position: relative;
    }

@@ -17,7 +17,7 @@
     </header>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .header-wrapper {
       @include flexbox(row, space-between, center, 0);
       @include width-height(100%, 2.28125rem);

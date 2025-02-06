@@ -8,7 +8,7 @@
     </section>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .error-container,
    .error-wrapper {
       @include width-height(100%, 100%);

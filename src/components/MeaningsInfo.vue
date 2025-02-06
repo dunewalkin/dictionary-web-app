@@ -58,7 +58,7 @@
    </article>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
    .speech-container {
       padding-block: 2.5rem;
       @include flexbox(row, flex-start, center, 1.25rem);
